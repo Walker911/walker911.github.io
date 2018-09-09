@@ -1,0 +1,19 @@
+sudo: false
+language: go
+git:
+    depth: 1
+install: go get -v github.com/gohugoio/hugo
+script:
+    hugo
+deploy:
+    provider: pages
+    skip_cleanup: true
+    github_token: $GitHub_Token
+    on:
+        branch: master
+    local_dir: public
+    repo: Walker911/walker911.github.io
+    # fqdn: <custom-domain-if-needed>
+    target_branch: master
+    email: qinmu911@163.com
+    name: walker911
