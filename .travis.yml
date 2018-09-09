@@ -10,7 +10,7 @@ deploy:
     skip_cleanup: true
     github_token: $GitHub_Token
     on:
-        branch: master
+        branch: hugo
     local_dir: public
     repo: Walker911/walker911.github.io
     # fqdn: <custom-domain-if-needed>
