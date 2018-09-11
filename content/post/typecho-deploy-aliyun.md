@@ -1,9 +1,6 @@
 ---
 title: "阿里云ECS搭建Typecho"
 date: 2018-09-09T15:36:00+08:00
-lastmod: 2018-09-09T15:36:00+08:00
-keywords: []
-description: ""
 tags: 
 - typecho
 - aliyun
