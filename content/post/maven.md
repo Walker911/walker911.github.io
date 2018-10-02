@@ -32,7 +32,7 @@ D:\build-tools\maven\apache-maven-3.5.3
 
 - 打开`CMD`窗口，利用命令`mvn -v`测试是否配置成功
 
-  ```powershell
+    ```powershell
   # 安装成功结果
   Apache Maven 3.5.3 (3383c37e1f9e9b3bc3df5050c29c8aff9f295297; 2018-02-25T03:49:05+08:00)
   Maven home: D:\build-tools\maven\apache-maven-3.5.3\bin\..
@@ -40,39 +40,39 @@ D:\build-tools\maven\apache-maven-3.5.3
   Java home: C:\Program Files\Java\jdk1.8.0_172\jre
   Default locale: zh_CN, platform encoding: GBK
   OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
-  ```
+    ```
 
 ### 配置`JDK1.8`环境
 
 - 全局配置JDK，在maven的`setting.xml`文件中添加如下代码：
 
-```xml
-<profile>    
-	<id>jdk18</id>    
-    <activation>    
-    	<activeByDefault>true</activeByDefault>    
-        <jdk>1.8</jdk>    
-    </activation>    
-    <properties>    
-        <maven.compiler.source>1.8</maven.compiler.source>    
-        <maven.compiler.target>1.8</maven.compiler.target>    
-        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>    
-    </properties>     
-</profile>
-```
+    ```xml
+  <profile>    
+  	<id>jdk18</id>    
+      <activation>    
+      	<activeByDefault>true</activeByDefault>    
+          <jdk>1.8</jdk>    
+      </activation>    
+      <properties>    
+          <maven.compiler.source>1.8</maven.compiler.source>    
+          <maven.compiler.target>1.8</maven.compiler.target>    
+          <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>    
+      </properties>     
+  </profile>
+    ```
 
 ## Maven镜像仓库配置
 
 - maven阿里云镜像仓库配置，在maven的`setting.xml`中添加：
 
-```xml
+    ```xml
 <mirror>  
 	<id>alimaven</id>  
 	<name>aliyun maven</name>  
 	<url>http://maven.aliyun.com/nexus/content/groups/public/</url>  
 	<mirrorOf>central</mirrorOf>          
 </mirror> 
-```
+    ```
 
 ## IDEA集成Maven
 

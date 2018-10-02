@@ -44,9 +44,9 @@ IDEA 开发工具支持将默认的`cmd` terminal 代换为 cmder，替换方法
 
 3. 将`Shell path`修改为
 
-   ```powershell
+    ```powershell
    "cmd.exe" /k ""%CMDER_ROOT%\vendor\init.bat""
-   ```
+    ```
 
    **注意**：
 

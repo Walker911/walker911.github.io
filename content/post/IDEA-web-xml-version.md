@@ -3,9 +3,12 @@ title: IDEA Maven WebApp Project默认生成web.xml版本修改
 date: 2018-07-25 08:55:36
 tags: [IDEA]
 categories: [IDE]
+figure: center
 ---
 
 目前，使用IDEA创建Maven webapp项目默认生成的web.xml文件的版本是2.3，文件内容如下：
+
+<!-- more-->
 
 ```xml
 <!DOCTYPE web-app PUBLIC
@@ -16,8 +19,6 @@ categories: [IDE]
   <display-name>Archetype Created Web Application</display-name>
 </web-app>
 ```
-
-<!-- more-->
 
 ## 为什么要去修改web.xml的版本？
 
@@ -35,37 +36,24 @@ categories: [IDE]
 
 ## 如何修改
 
-1. 在你的maven本地仓库中，根据如下坐标找到jar包：
+1. 在你的maven本地仓库中，根据如下坐标找到jar包:
+    ```java
+    org.apache.maven.archetypes.maven-archetype-webapp.1.3
+    ```
 
-   ```
-   org.apache.maven.archetypes.maven-archetype-webapp.1.3
-   ```
+2. 用解压工具打开`maven-archetype-webapp-1.3.jar`包（无需解压），可以发现里面包含一个`web.xml`，文件内容为：新建一个`web.xml`文件，内容如下：
 
-2. 用解压工具打开`maven-archetype-webapp-1.3.jar`包（无需解压），可以发现里面包含一个`web.xml`，文件内容为：
-
-   ```xml
-   <!DOCTYPE web-app PUBLIC
-    "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-    "http://java.sun.com/dtd/web-app_2_3.dtd" >
-   
-   <web-app>
-     <display-name>Archetype Created Web Application</display-name>
-   </web-app>
-   ```
-
-3. 新建一个`web.xml`文件，内容如下：
-
-   ```xml
-   <?xml version="1.0" encoding="UTF-8"?>
-   <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    ```xml
+      <?xml version="1.0" encoding="UTF-8"?>
+      <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
             version="3.1">
-   
+      
      <display-name>Archetype Created Web Application</display-name>
-   </web-app>
-   ```
+      </web-app>
+    ```
 
-   然后，用这个文件将jar包的web.xml替换，即可。
+    然后，用这个文件将jar包的web.xml替换，即可。
 
-4. 使用IDEA创建一个Maven webapp项目，即可发现web.xml的版本已经修改成功。
+3. 使用IDEA创建一个Maven webapp项目，即可发现web.xml的版本已经修改成功。

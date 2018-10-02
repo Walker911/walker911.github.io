@@ -51,12 +51,12 @@ mysql -h127.0.0.1 -uroot -proot --default-character-set=utf8
 
 - `character_set_filesystem`: 把文件名转换为此字符集，默认`binary`，不做转换。
 
-  > The file system character set. This variable is used to interpret string literals that refer to file names, such as in the LOAD DATA INFILE and SELECT ... INTO OUTFILE statements and the LOAD_FILE() function. Such file names are converted from character_set_client to character_set_filesystem before the file opening attempt occurs. The default value is binary, which means that no conversion occurs. For systems on which multibyte file names are permitted, a different value may be more appropriate. For example, if the system represents file names using UTF-8, set character_set_filesystem to 'utf8'.
+    > The file system character set. This variable is used to interpret string literals that refer to file names, such as in the LOAD DATA INFILE and SELECT ... INTO OUTFILE statements and the LOAD_FILE() function. Such file names are converted from character_set_client to character_set_filesystem before the file opening attempt occurs. The default value is binary, which means that no conversion occurs. For systems on which multibyte file names are permitted, a different value may be more appropriate. For example, if the system represents file names using UTF-8, set character_set_filesystem to 'utf8'.
 
 - `character_set_system`
 
-  > The character set used by the server for storing identifiers. The value is always utf8.
+    > The character set used by the server for storing identifiers. The value is always utf8.
 
 - `character_set_dir`
 
-  > The directory where character sets are installed. 
+    > The directory where character sets are installed. 
