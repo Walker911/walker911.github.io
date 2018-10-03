@@ -40,16 +40,14 @@ Hexo 本地环境非常容易进行搭建，这里不进行详细说明。本地
 3. 给``~/.ssh/authorized_keys`文件添加权限
 
     ```bash
-      chmod +x authorized_keys
+    chmod +x authorized_keys
     ```
 
 4. 在本地执行`ssh`命令测试是否可以免密登录
 
     ```bash
-    
-    ```
-   # ip: 阿里云公网ip
-   ssh -v git@ip
+    # ip: 阿里云公网ip
+    ssh -v git@ip
     ```
 
 ### 自动化部署
@@ -57,33 +55,29 @@ Hexo 本地环境非常容易进行搭建，这里不进行详细说明。本地
 1. 在服务器上建立 git 裸库
 
     ```bash
-      cd /home
-      git init --bare hexo.git
+    cd /home
+    git init --bare hexo.git
     ```
 
 2. 使用 git-hooks 同步文件
 
     ```bash
-      cd hexo.git
-      vim ./post-receive
+    cd hexo.git
+    vim ./post-receive
     ```
 
     post-receive 文件内容：
 
     ```bash
-      !/bin/sh
-      git --work-tree=/home/wwwroot/default/hexo --git-dir=/home/hexo.git checkout -f
-
+    !/bin/sh
+    git --work-tree=/home/wwwroot/default/hexo --git-dir=/home/hexo.git checkout -f
     ```
-
-    
-
     > 显示指定 git-dir (.git目录) 和 work-tree, -f 强制 checkout
 
     给文件添加权限
 
     ```bash
-   chmod +x post-receive
+    chmod +x post-receive
     ```
 
 3. 本地 Hexo，配置`_config.yml`
@@ -91,12 +85,12 @@ Hexo 本地环境非常容易进行搭建，这里不进行详细说明。本地
     修改内容：
 
     ```yaml
-   # ip-公网ip
-   deploy:
-     type: git
-     repository: root@ip:/home/hexo.git
-     branch: master
-     message: update
+    # ip-公网ip
+    deploy:
+      type: git
+      repository: root@ip:/home/hexo.git
+      branch: master
+      message: update
     ```
 
 ## 测试
@@ -106,7 +100,7 @@ Hexo 本地环境非常容易进行搭建，这里不进行详细说明。本地
 2. 执行命令，然后访问，测试文章是否发布成功
 
     ```bash
-   hexo clean & hexo g -d
+    hexo clean & hexo g -d
     ```
 
 
