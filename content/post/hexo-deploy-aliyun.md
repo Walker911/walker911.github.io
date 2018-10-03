@@ -65,7 +65,6 @@ Hexo 本地环境非常容易进行搭建，这里不进行详细说明。本地
     cd hexo.git
     vim ./post-receive
     ```
-
     post-receive 文件内容：
 
     ```bash
@@ -80,9 +79,7 @@ Hexo 本地环境非常容易进行搭建，这里不进行详细说明。本地
     chmod +x post-receive
     ```
 
-3. 本地 Hexo，配置`_config.yml`
-
-    修改内容：
+3. 本地 Hexo，配置`_config.yml`，修改内容：
 
     ```yaml
     # ip-公网ip

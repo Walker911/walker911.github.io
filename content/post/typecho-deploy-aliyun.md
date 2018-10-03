@@ -31,13 +31,13 @@ author: "walker"
 1. 下载 LNMP 安装包并安装
 
     ```bash
-   # 获取安装包
-   wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz
-   # 解压
-   tar zxf lnmp1.5.tar.gz 
-   # 安装
-   cd lnmp1.5
-   ./install.sh lnmp
+    # 获取安装包
+    wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz
+    # 解压
+    tar zxf lnmp1.5.tar.gz 
+    # 安装
+    cd lnmp1.5
+    ./install.sh lnmp
     ```
 
     根据提示选择需要安装的版本，这里基本上都是选择默认设置进行安装，然后等待安装过程的执行，当出现安装成功的界面，说明已经安装完成。
@@ -51,7 +51,7 @@ author: "walker"
 1. 下载 typecho [安装包](http://typecho.org/download)，然后上传到服务器，也可以在服务器上执行下面的命令进行获取。
 
     ```bash
-   wget http://typecho.org/downloads/1.1-17.10.30-release.tar.gz
+    wget http://typecho.org/downloads/1.1-17.10.30-release.tar.gz
     ```
 
 2. 将安装包解压到指定目录，这里由于 LNMP 安装后，nginx 默认 root 指向为`/home/wwwroot/default`，我们这里在这个目录下新建`blog`目录，然后将 typecho 解压到这个目录。
@@ -69,14 +69,14 @@ author: "walker"
     nginx 伪静态化问题，找到`nginx.conf`配置文件，这里按如下修改，解决了该问题，
 
     ```bash
-# 修改前
-server {
-    include enable-php.conf;
-}
-# 修改为
-server {
-    include enable-php-pathinfo.conf;
-}
+    # 修改前
+    server {
+      include enable-php.conf;
+    }
+    # 修改为
+    server {
+      include enable-php-pathinfo.conf;
+    }
     ```
 
 - Navicat 远程连接阿里云 MySQL 报10060错误
@@ -86,13 +86,13 @@ server {
     2. `mysql`数据中`user`表设置`root`的`host`为`%`
 
         ```mysql
-         update user set host='%' where user='root';
+        update user set host='%' where user='root';
         ```
 
     3. 重启 MySQL 服务
 
         ```bash
-         service mysql restart
+        service mysql restart
         ```
 
     4. 重启实例
