@@ -13,7 +13,7 @@ categories: [MySQL]
 show variables like 'character_set%';
 ```
 
-<!-- more -->
+<!--more-->
 
 结果如下：
 

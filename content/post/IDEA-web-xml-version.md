@@ -1,14 +1,18 @@
----
-title: IDEA Maven WebApp Project默认生成web.xml版本修改
-date: 2018-07-25 08:55:36
-tags: [IDEA]
-categories: [IDE]
-figure: center
----
++++
+title = "修改 IDEA Maven WebApp web.xml 的版本"
+date = "2018-07-25 08:55:36"
+tags = ["IDEA"]
+categories = ["IDE"]
+
++++
+
+## 引言
+
+记录修改 IDEA Maven WebApp `web.xml` 的过程。
 
 目前，使用IDEA创建Maven webapp项目默认生成的web.xml文件的版本是2.3，文件内容如下：
 
-<!-- more-->
+<!--more-->
 
 ```xml
 <!DOCTYPE web-app PUBLIC

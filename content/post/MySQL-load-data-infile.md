@@ -12,7 +12,7 @@ categories: [MySQL]
 - OS: Windows 10
 - MySQL Version: 5.7.19
 
-<!-- more -->
+<!--more-->
 
 ## 基本语法
 

@@ -19,7 +19,7 @@ MySQL 中使用索引：先在索引中找到对应值，然后根据匹配的�
 show index from table_name;
 ```
 
-<!-- more -->
+<!--more-->
 
 ### 主键索引 (primary key)
 

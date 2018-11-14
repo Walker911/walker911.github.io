@@ -2,9 +2,9 @@
 title: SpringBoot MockMVC 学习
 date: 2018-10-03
 tags:
-- 单元测试
+- MockMVC
 categories:
-- 代码片段
+- 单元测试
 ---
 
 学习使用 `MockMVC` 对代码进行测试，代码片段记录。
