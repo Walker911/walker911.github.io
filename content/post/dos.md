@@ -1,8 +1,8 @@
 ---
 title: cmd 命令使用清单
 date: 2018-11-6
-categories: 工具
-tags: cmd
+categories: [工具]
+tags: [cmd]
 ---
 
 记录一些使用的 `cmd` 命令清单。
