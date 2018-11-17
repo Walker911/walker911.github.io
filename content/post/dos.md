@@ -1,6 +1,6 @@
 ---
 title: cmd 命令使用清单
-date: 2018-11-6
+date: 2018-11-16
 categories: [工具]
 tags: [cmd]
 ---
