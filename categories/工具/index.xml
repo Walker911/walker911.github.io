@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>工具 on Walker</title>
+    <link>https://walker911.github.io/categories/%E5%B7%A5%E5%85%B7/</link>
+    <description>Recent content in 工具 on Walker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 16 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://walker911.github.io/categories/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>cmd 命令使用清单</title>
+      <link>https://walker911.github.io/2018/11/16/cmd-%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%B8%85%E5%8D%95/</link>
+      <pubDate>Fri, 16 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://walker911.github.io/2018/11/16/cmd-%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%B8%85%E5%8D%95/</guid>
+      <description> 记录一些使用的 cmd 命令清单。
+命令  终止进程：taskkill /f /im chrome.exe tasklist：任务列表  遇到的问题 遇到 windows 端口被占用，又不想去任务管理器中逐个查找，可以使用下述过程进行处理，这种情况是 hexo 和 福昕阅读器端口出现冲突的情况。
+ 查看端口占用的进程ID(PID)  netstat -ano 各个端口占用和进程PID // 查看4000端口情况 netstat -ano | findstr &amp;quot;4000&amp;quot;   查看端口号所对应的应用程序  tasklist | findstr &amp;quot;4632&amp;quot;   终止进程  taskkill /pid 4632 /F or taskkill /f /t /im 进程  </description>
+    </item>
+    
+    <item>
+      <title>阿里云ECS搭建Hexo</title>
+      <link>https://walker911.github.io/2018/09/10/%E9%98%BF%E9%87%8C%E4%BA%91ecs%E6%90%AD%E5%BB%BAhexo/</link>
+      <pubDate>Mon, 10 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://walker911.github.io/2018/09/10/%E9%98%BF%E9%87%8C%E4%BA%91ecs%E6%90%AD%E5%BB%BAhexo/</guid>
+      <description>&lt;p&gt;使用阿里云 ECS 部署博客 Hexo，主要记录 Hexo 如何 push 到阿里云服务器，实现本地环境 Hexo 生成静态文件，将文件 push 到服务器后，通过 git-hooks 自动将文件 checkout 到部署目录。&lt;/p&gt;
+
+&lt;h2 id=&#34;环境&#34;&gt;环境&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;服务器：阿里云2核4G&lt;/li&gt;
+&lt;li&gt;系统：CentOS7&lt;/li&gt;
+&lt;li&gt;nginx：借助 LNMP 所安装的 nginx&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>阿里云ECS搭建Typecho</title>
+      <link>https://walker911.github.io/2018/09/09/%E9%98%BF%E9%87%8C%E4%BA%91ecs%E6%90%AD%E5%BB%BAtypecho/</link>
+      <pubDate>Sun, 09 Sep 2018 15:36:00 +0800</pubDate>
+      
+      <guid>https://walker911.github.io/2018/09/09/%E9%98%BF%E9%87%8C%E4%BA%91ecs%E6%90%AD%E5%BB%BAtypecho/</guid>
+      <description>&lt;p&gt;使用阿里云 ECS 搭建博客 &lt;a href=&#34;http://typecho.org/&#34;&gt;Typecho&lt;/a&gt;，记录下搭建流程和遇到的问题。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Cmder介绍</title>
+      <link>https://walker911.github.io/2018/08/10/cmder%E4%BB%8B%E7%BB%8D/</link>
+      <pubDate>Fri, 10 Aug 2018 23:20:00 +0000</pubDate>
+      
+      <guid>https://walker911.github.io/2018/08/10/cmder%E4%BB%8B%E7%BB%8D/</guid>
+      <description>&lt;p&gt;&lt;code&gt;cmder&lt;/code&gt; 一款可以用来替代 Windows 自带 cmd 的工具。&lt;/p&gt;
+
+&lt;p&gt;官网：&lt;a href=&#34;http://cmder.net/&#34;&gt;cmder&lt;/a&gt;，完整版也对&lt;code&gt;git&lt;/code&gt;进行了集成。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

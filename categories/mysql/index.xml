@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mysql on Walker</title>
+    <link>https://walker911.github.io/categories/mysql/</link>
+    <description>Recent content in Mysql on Walker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 28 Jul 2018 15:34:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://walker911.github.io/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySQL load data infile简介</title>
+      <link>https://walker911.github.io/2018/07/28/mysql-load-data-infile%E7%AE%80%E4%BB%8B/</link>
+      <pubDate>Sat, 28 Jul 2018 15:34:00 +0000</pubDate>
+      
+      <guid>https://walker911.github.io/2018/07/28/mysql-load-data-infile%E7%AE%80%E4%BB%8B/</guid>
+      <description>&lt;p&gt;最近，需要将Excel里面的数据导入到MySQL，数据量大概有200万左右，于是就查询MySQL是否有快速导入数据的方法，然后发现MySQL提供一种高效导入数据的方法，即是&lt;code&gt;load data infile&lt;/code&gt;。这里记录用到的一些参数。&lt;/p&gt;
+
+&lt;h2 id=&#34;环境&#34;&gt;环境&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;OS: Windows 10&lt;/li&gt;
+&lt;li&gt;MySQL Version: 5.7.19&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL character_set字符集</title>
+      <link>https://walker911.github.io/2018/07/26/mysql-character_set%E5%AD%97%E7%AC%A6%E9%9B%86/</link>
+      <pubDate>Thu, 26 Jul 2018 22:08:10 +0000</pubDate>
+      
+      <guid>https://walker911.github.io/2018/07/26/mysql-character_set%E5%AD%97%E7%AC%A6%E9%9B%86/</guid>
+      <description>&lt;h2 id=&#34;查看变量&#34;&gt;查看变量&lt;/h2&gt;
+
+&lt;p&gt;使用&lt;code&gt;cmd&lt;/code&gt;查看MySQL character_set 变量：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;show variables like &#39;character_set%&#39;;
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

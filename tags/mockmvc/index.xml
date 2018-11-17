@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mockmvc on Walker</title>
+    <link>https://walker911.github.io/tags/mockmvc/</link>
+    <description>Recent content in Mockmvc on Walker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 03 Oct 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://walker911.github.io/tags/mockmvc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SpringBoot MockMVC 学习</title>
+      <link>https://walker911.github.io/2018/10/03/springboot-mockmvc-%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Wed, 03 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://walker911.github.io/2018/10/03/springboot-mockmvc-%E5%AD%A6%E4%B9%A0/</guid>
+      <description>&lt;p&gt;学习使用 &lt;code&gt;MockMVC&lt;/code&gt; 对代码进行测试，代码片段记录。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

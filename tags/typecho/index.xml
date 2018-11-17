@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Typecho on Walker</title>
+    <link>https://walker911.github.io/tags/typecho/</link>
+    <description>Recent content in Typecho on Walker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 09 Sep 2018 15:36:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://walker911.github.io/tags/typecho/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>阿里云ECS搭建Typecho</title>
+      <link>https://walker911.github.io/2018/09/09/%E9%98%BF%E9%87%8C%E4%BA%91ecs%E6%90%AD%E5%BB%BAtypecho/</link>
+      <pubDate>Sun, 09 Sep 2018 15:36:00 +0800</pubDate>
+      
+      <guid>https://walker911.github.io/2018/09/09/%E9%98%BF%E9%87%8C%E4%BA%91ecs%E6%90%AD%E5%BB%BAtypecho/</guid>
+      <description>&lt;p&gt;使用阿里云 ECS 搭建博客 &lt;a href=&#34;http://typecho.org/&#34;&gt;Typecho&lt;/a&gt;，记录下搭建流程和遇到的问题。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

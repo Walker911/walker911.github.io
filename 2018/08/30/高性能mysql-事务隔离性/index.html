@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>高性能MySQL-事务隔离性 &middot; Walker</title>
+    <meta name="generator" content="Hugo 0.52-DEV" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Walker">
+    
+      <meta name="description" content="">
+    
+    
+    <link rel="canonical" href="https://walker911.github.io/2018/08/30/%E9%AB%98%E6%80%A7%E8%83%BDmysql-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E6%80%A7/"/>
+    <link rel="icon" href="https://walker911.github.io/favicon.ico">
+    <link rel="apple-touch-icon" href="https://walker911.github.io/apple-touch-icon.png"/>
+    <link rel="stylesheet" href="https://walker911.github.io/css/style.css">
+    <link rel="stylesheet" href="https://walker911.github.io/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://walker911.github.io/css/monokai.css">
+    <link rel="stylesheet" href="https://walker911.github.io/fancybox/jquery.fancybox.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <meta property="og:title" content="高性能MySQL-事务隔离性" />
+<meta property="og:description" content="环境
+
+OS: Windows 10
+
+MySQL version: 8.0
+
+引擎：InnoDB
+
+事务隔离性
+
+通常来说，一个事务所做的修改在最终提交以前，对其他事务是不可见的。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://walker911.github.io/2018/08/30/%E9%AB%98%E6%80%A7%E8%83%BDmysql-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E6%80%A7/" /><meta property="article:published_time" content="2018-08-30T12:30:00&#43;00:00"/>
+<meta property="article:modified_time" content="2018-08-30T12:30:00&#43;00:00"/>
+
+    
+    
+<meta itemprop="name" content="高性能MySQL-事务隔离性">
+<meta itemprop="description" content="环境
+
+OS: Windows 10
+
+MySQL version: 8.0
+
+引擎：InnoDB
+
+事务隔离性
+
+通常来说，一个事务所做的修改在最终提交以前，对其他事务是不可见的。">
+
+
+<meta itemprop="datePublished" content="2018-08-30T12:30:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-08-30T12:30:00&#43;00:00" />
+<meta itemprop="wordCount" content="351">
+
+
+
+<meta itemprop="keywords" content="MySQL,事务," />
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="高性能MySQL-事务隔离性"/>
+<meta name="twitter:description" content="环境
+
+OS: Windows 10
+
+MySQL version: 8.0
+
+引擎：InnoDB
+
+事务隔离性
+
+通常来说，一个事务所做的修改在最终提交以前，对其他事务是不可见的。"/>
+
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	<header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="https://walker911.github.io/" id="logo">
+          
+          <i class="logo" style="background-image: url('https://walker911.github.io/css/images/logo.png')"></i>
+          
+          <span class="site-title">Walker</span>
+      </a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="https://walker911.github.io/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="https://walker911.github.io/tags/">Tags</a>
+          
+          
+          
+          <a class="main-nav-link" href="https://walker911.github.io/categories/">Categories</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://walker911.github.io/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="sitesearch" value="https://walker911.github.io/" />
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="https://walker911.github.io/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="https://walker911.github.io/tags/">Tags</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="https://walker911.github.io/categories/">Categories</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="sitesearch" value="https://walker911.github.io/" />
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+   	
+    	<aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      
+      <img id="avatar" src="https://walker911.github.io/css/images/avatar.png">
+      
+      <h2 id="name">Walker</h2>
+      <h3 id="title">Programmer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Earth</span>
+      
+          <a id="follow" href="https://github.com/Walker911">
+              Follow
+          </a>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        12
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          10
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="profile-block social-links">
+      <table>
+        <tr>
+          
+<td><a href="//github.com/Walker911" target="_blank" title="GitHub"><i class="fa fa-github"></i></a></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <td><a href="https://walker911.github.io/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+    
+
+    <section id="main">
+    
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+
+        <header class="article-header">
+    <a href="https://walker911.github.io/2018/08/30/%E9%AB%98%E6%80%A7%E8%83%BDmysql-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E6%80%A7/">
+    <h1 class="article-title" itemprop="name">
+        高性能MySQL-事务隔离性
+    </h1>
+    </a>
+    <div class="article-meta">
+
+        
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2018-08-30 12:30:00 &#43;0000 UTC" itemprop="datePublished">2018-08-30</time>
+            
+        </div>
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                
+                <a class="article-category-link" href="https://walker911.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">读书笔记</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                
+                <a class="article-category-link" href="https://walker911.github.io/tags/mysql">MySQL</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://walker911.github.io/tags/%E4%BA%8B%E5%8A%A1">事务</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="环境">环境</h2>
+
+<p>OS: Windows 10</p>
+
+<p>MySQL version: 8.0</p>
+
+<p>引擎：InnoDB</p>
+
+<h2 id="事务隔离性">事务隔离性</h2>
+
+<p>通常来说，一个事务所做的修改在最终提交以前，对其他事务是不可见的。</p>
+
+<h3 id="事务隔离级别">事务隔离级别</h3>
+
+<p>事务隔离级别如下：</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">事务隔离级别</th>
+<th align="center">脏读</th>
+<th align="center">不可重复读</th>
+<th align="center">幻读</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">读未提交（read-uncommitted）</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+</tr>
+
+<tr>
+<td align="center">提交读（read-committed）</td>
+<td align="center">no</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+</tr>
+
+<tr>
+<td align="center">可重复读（repeatable-read）</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">yes</td>
+</tr>
+
+<tr>
+<td align="center">串行化（seriaizable）</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">no</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>yes: 可能出现</p>
+
+<p>no: 不会出现</p>
+</blockquote>
+
+<p>查看默认事务隔离级别，命令如下：</p>
+
+<pre><code class="language-mysql">-- 查看本次会话
+select @@transaction_isolation;
+-- 查看全局
+select @@global.transaction_isolation;
+</code></pre>
+
+<p>结果如图，MySQL 默认事务级别为 <code>REPEATABLE-READ</code></p>
+
+<p><img src="https://walker911-1256994604.cos.ap-shanghai.myqcloud.com/blog%2Fmysql_transaction_isolation.png" alt="" /></p>
+
+<h4 id="read-uncommitted-未提交读">READ-UNCOMMITTED (未提交读)</h4>
+
+<p>在这个级别，事务中的修改，即使没有提交，对其他事务也都是可见的。</p>
+
+<p>事务可以读取未提交的数据，称为<strong>脏读</strong>(Dirty Read)。</p>
+
+<p>示例 1：</p>
+
+<p>修改事务隔离级别为<code>READ-UNCOMMITTED</code></p>
+
+<pre><code class="language-mysql">-- 修改全局事务隔离级别
+set global transaction_isolation='read-uncommitted';
+-- session 级别
+set session transaction_isolation='read-uncommitted'
+</code></pre>
+
+<p>开启两个 MySQL 客户端，同时关闭事务自动提交。</p>
+
+<pre><code class="language-mysql">-- client 1 and client 2
+-- 查看autocommit
+show variables like 'autocommit';
+-- 修改autocommit
+set autocommit='off';
+</code></pre>
+
+<p>Client 1 执行操作如下：</p>
+
+<p><img src="https://walker911-1256994604.cos.ap-shanghai.myqcloud.com/blog%2Fmysql_client1.png" alt="" /></p>
+
+<p>Client 2 执行操作如下：</p>
+
+<p><img src="https://walker911-1256994604.cos.ap-shanghai.myqcloud.com/blog%2Fmysql_client2.png" alt="" /></p>
+
+<p>可以发现，在 Client 1 事务未提交前，Client 2 可以看到未提交的数据，如果将这时候将拿到的数据去展示或者做其他用途，然后 Client 1做了<code>rollback</code>，那么就出现了脏读的现象。</p>
+
+<h4 id="read-committed-提交读">READ-COMMITTED (提交读)</h4>
+
+<p>一个事务开始时，只能“看到”其他已经提交的事务所做的修改。</p>
+
+<p>执行两次相同的查询，可能会得到不一样的结果，所以这个级别有时候也叫做不可重复读（nonrepeatable read）。</p>
+
+<p>示例 2：</p>
+
+<p>和示例 1 类似，修改事务隔离级别，开启两个客户端，并关闭事务自动提交。</p>
+
+<pre><code class="language-mysql">set global transaction_isolation='read-committed';
+set session transaction_isolation='read-committed';
+set autocommit='off';
+</code></pre>
+
+<p>执行过程：</p>
+
+<pre><code class="language-mysql">-- client 1 查询并插入一条数据
+select * from user;
++----+------+------+ 
+| id | name | age  | 
++----+------+------+ 
+|  1 | jack |   18 | 
++----+------+------+ 
+begin;
+insert into user values(2,'james',20);
+-- client 2 查询
+select * from user;
++----+------+------+ 
+| id | name | age  | 
++----+------+------+ 
+|  1 | jack |   18 | 
++----+------+------+ 
+-- client 1 提交事务
+commit;
+-- client 2 重新查询
+select * from user;
++----+-------+------+
+| id | name  | age  |
++----+-------+------+
+|  1 | jack  |   18 |
+|  2 | james |   20 |
++----+-------+------+
+</code></pre>
+
+<h4 id="repeatable-read-可重复读">REPEATABLE-READ (可重复读)</h4>
+
+<p>MySQL的默认事务隔离级别。同一个事务中多次执行同样的查询，得到的结果是一致的。理论上，可重复读隔离级别还是无法解决另外一个幻读 (Phantom Read) 的问题。</p>
+
+<blockquote>
+<p>在同一个事务内的查询都是事务开始时刻一致的。摘自<a href="https://tech.meituan.com/innodb_lock.html">美团点评技术</a></p>
+</blockquote>
+
+<p>幻读指的是当某个事务在读取某个范围内的记录时，另外一个事务又在该范围内插入了新的记录，当之前的事务再次读取该范围的记录时，会产生幻行（Phantom Row）。</p>
+
+<p>InnoDB 和 XtraDB 存储引擎通过多版本并发控制（MVCC, Multiversion Concurrency Control）解决了幻读的问题。</p>
+
+<blockquote>
+<p>MVVC：是一种乐观锁机制。需要详细了解乐观锁和悲观锁</p>
+</blockquote>
+
+<p>示例 3：</p>
+
+<p>同样的，修改事务隔离级别，开启两个客户端，并关闭事务自动提交。</p>
+
+<pre><code class="language-mysql">set global transaction_isolation='repeatable-read';
+set session transaction_isolation='repeatable-read';
+set autocommit='off';
+</code></pre>
+
+<p>执行过程：</p>
+
+<pre><code class="language-mysql">-- client 1 查询并插入一条数据
+select * from user;
++----+-------+------+
+| id | name  | age  |
++----+-------+------+
+|  1 | jack  |   18 |
+|  2 | james |   20 |
++----+-------+------+
+begin;
+insert into user values(3,'west',25);
+-- client 2 查询
+select * from user;
++----+-------+------+
+| id | name  | age  |
++----+-------+------+
+|  1 | jack  |   18 |
+|  2 | james |   20 |
++----+-------+------+
+-- client 1 提交事务
+commit;
+-- client 2 重新查询
+select * from user;
++----+-------+------+
+| id | name  | age  |
++----+-------+------+
+|  1 | jack  |   18 |
+|  2 | james |   20 |
++----+-------+------+
+</code></pre>
+
+<h4 id="serializable-可串行化">SERIALIZABLE (可串行化)</h4>
+
+<p>最高的隔离级别，强制事务串行执行。</p>
+
+<p>简单来说，SERIALIZABLE 会在读取的每一行数据上都加锁，所以可能导致大量的超时和锁争用的问题。</p>
+        </div>
+        <footer class="article-footer">
+    <a data-url="https://walker911.github.io/2018/08/30/%E9%AB%98%E6%80%A7%E8%83%BDmysql-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E6%80%A7/" data-id="19c70c65d5895c355b05e5ce8bfed9ee" class="article-share-link">
+        <i class="fa fa-share"></i>
+        Share
+    </a>
+    
+
+    <script>
+    (function ($) {
+        
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+    </script>
+</footer>
+
+    </div>
+
+    
+<nav id="article-nav">
+    
+    <a href="https://walker911.github.io/2018/08/10/cmder%E4%BB%8B%E7%BB%8D/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">Cmder介绍</div>
+    </a>
+    
+
+    
+    <a href="https://walker911.github.io/2018/09/01/%E9%AB%98%E6%80%A7%E8%83%BD-mysql-%E7%B4%A2%E5%BC%95%E5%9F%BA%E7%A1%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Newer
+      </strong>
+      <div class="article-nav-title">高性能 MySQL - 索引基础</div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+
+
+    </section>
+
+   	
+    	<aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="https://walker911.github.io/2018/11/16/cmd-%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%B8%85%E5%8D%95/" class="thumbnail">
+                    
+                        <span class="thumbnail-image thumbnail-none"></span>
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    
+                    <p class="item-category">
+                        
+                        <a class="article-category-link" href="https://walker911.github.io/categories/%E5%B7%A5%E5%85%B7">
+                        工具
+                        </a>
+                    </p>
+                    
+                    
+                    <p class="item-title"><a href="https://walker911.github.io/2018/11/16/cmd-%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%B8%85%E5%8D%95/" class="title">cmd 命令使用清单</a></p>
+                    <p class="item-date">
+                        <time datetime="2018-11-16 00:00:00 &#43;0000 UTC" itemprop="datePublished">2018-11-16</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="https://walker911.github.io/2018/10/03/springboot-mockmvc-%E5%AD%A6%E4%B9%A0/" class="thumbnail">
+                    
+                        <span class="thumbnail-image thumbnail-none"></span>
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    
+                    <p class="item-category">
+                        
+                        <a class="article-category-link" href="https://walker911.github.io/categories/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95">
+                        单元测试
+                        </a>
+                    </p>
+                    
+                    
+                    <p class="item-title"><a href="https://walker911.github.io/2018/10/03/springboot-mockmvc-%E5%AD%A6%E4%B9%A0/" class="title">SpringBoot MockMVC 学习</a></p>
+                    <p class="item-date">
+                        <time datetime="2018-10-03 00:00:00 &#43;0000 UTC" itemprop="datePublished">2018-10-03</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="https://walker911.github.io/2018/09/10/%E9%98%BF%E9%87%8C%E4%BA%91ecs%E6%90%AD%E5%BB%BAhexo/" class="thumbnail">
+                    
+                        <span class="thumbnail-image thumbnail-none"></span>
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    
+                    <p class="item-category">
+                        
+                        <a class="article-category-link" href="https://walker911.github.io/categories/%E5%B7%A5%E5%85%B7">
+                        工具
+                        </a>
+                    </p>
+                    
+                    
+                    <p class="item-title"><a href="https://walker911.github.io/2018/09/10/%E9%98%BF%E9%87%8C%E4%BA%91ecs%E6%90%AD%E5%BB%BAhexo/" class="title">阿里云ECS搭建Hexo</a></p>
+                    <p class="item-date">
+                        <time datetime="2018-09-10 00:00:00 &#43;0000 UTC" itemprop="datePublished">2018-09-10</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="https://walker911.github.io/2018/09/09/%E9%98%BF%E9%87%8C%E4%BA%91ecs%E6%90%AD%E5%BB%BAtypecho/" class="thumbnail">
+                    
+                        <span class="thumbnail-image thumbnail-none"></span>
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    
+                    <p class="item-category">
+                        
+                        <a class="article-category-link" href="https://walker911.github.io/categories/%E5%B7%A5%E5%85%B7">
+                        工具
+                        </a>
+                    </p>
+                    
+                    
+                    <p class="item-title"><a href="https://walker911.github.io/2018/09/09/%E9%98%BF%E9%87%8C%E4%BA%91ecs%E6%90%AD%E5%BB%BAtypecho/" class="title">阿里云ECS搭建Typecho</a></p>
+                    <p class="item-date">
+                        <time datetime="2018-09-09 15:36:00 &#43;0800 &#43;0800" itemprop="datePublished">2018-09-09</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="https://walker911.github.io/2018/09/01/%E9%AB%98%E6%80%A7%E8%83%BD-mysql-%E7%B4%A2%E5%BC%95%E5%9F%BA%E7%A1%80/" class="thumbnail">
+                    
+                        <span class="thumbnail-image thumbnail-none"></span>
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    
+                    <p class="item-category">
+                        
+                        <a class="article-category-link" href="https://walker911.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">
+                        读书笔记
+                        </a>
+                    </p>
+                    
+                    
+                    <p class="item-title"><a href="https://walker911.github.io/2018/09/01/%E9%AB%98%E6%80%A7%E8%83%BD-mysql-%E7%B4%A2%E5%BC%95%E5%9F%BA%E7%A1%80/" class="title">高性能 MySQL - 索引基础</a></p>
+                    <p class="item-date">
+                        <time datetime="2018-09-01 12:00:00 &#43;0000 UTC" itemprop="datePublished">2018-09-01</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://walker911.github.io/categories/ide">
+                    ide
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://walker911.github.io/categories/maven">
+                    maven
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://walker911.github.io/categories/mysql">
+                    mysql
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://walker911.github.io/categories/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95">
+                    单元测试
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://walker911.github.io/categories/%E5%B7%A5%E5%85%B7">
+                    工具
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://walker911.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">
+                    读书笔记
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://walker911.github.io/tags/aliyun">
+                    aliyun
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://walker911.github.io/tags/cmd">
+                    cmd
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://walker911.github.io/tags/cmder">
+                    cmder
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://walker911.github.io/tags/hexo">
+                    hexo
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://walker911.github.io/tags/idea">
+                    idea
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://walker911.github.io/tags/maven">
+                    maven
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://walker911.github.io/tags/mockmvc">
+                    mockmvc
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://walker911.github.io/tags/mysql">
+                    mysql
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://walker911.github.io/tags/typecho">
+                    typecho
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://walker911.github.io/tags/%E4%BA%8B%E5%8A%A1">
+                    事务
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        
+        <a href="https://walker911.github.io/tags/aliyun" style="font-size: 12px;">aliyun</a>
+        
+        
+        <a href="https://walker911.github.io/tags/cmd" style="font-size: 12px;">cmd</a>
+        
+        
+        <a href="https://walker911.github.io/tags/cmder" style="font-size: 12px;">cmder</a>
+        
+        
+        <a href="https://walker911.github.io/tags/hexo" style="font-size: 12px;">hexo</a>
+        
+        
+        <a href="https://walker911.github.io/tags/idea" style="font-size: 12px;">idea</a>
+        
+        
+        <a href="https://walker911.github.io/tags/maven" style="font-size: 12px;">maven</a>
+        
+        
+        <a href="https://walker911.github.io/tags/mockmvc" style="font-size: 12px;">mockmvc</a>
+        
+        
+        <a href="https://walker911.github.io/tags/mysql" style="font-size: 12px;">mysql</a>
+        
+        
+        <a href="https://walker911.github.io/tags/typecho" style="font-size: 12px;">typecho</a>
+        
+        
+        <a href="https://walker911.github.io/tags/%E4%BA%8B%E5%8A%A1" style="font-size: 12px;">事务</a>
+        
+    </div>
+</div>
+
+
+
+
+
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+    
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018
+      Powered by <a href="//gohugo.io">Hugo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://walker911.github.io/fancybox/jquery.fancybox.pack.js"></script>
+<script src="https://walker911.github.io/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+</body>
+</html>

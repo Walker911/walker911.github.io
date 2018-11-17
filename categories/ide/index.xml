@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ide on Walker</title>
+    <link>https://walker911.github.io/categories/ide/</link>
+    <description>Recent content in Ide on Walker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 29 Jul 2018 10:21:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://walker911.github.io/categories/ide/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>IDEA Maven多模块问题</title>
+      <link>https://walker911.github.io/2018/07/29/idea-maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Sun, 29 Jul 2018 10:21:00 +0000</pubDate>
+      
+      <guid>https://walker911.github.io/2018/07/29/idea-maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E9%97%AE%E9%A2%98/</guid>
+      <description>使用IDEA进行Maven多模块项目开发时，出现parent项目中统一管理的jar在子模块引用时，并没有导入，查找发现，子模块的pom.xml被忽略。
+通过File | Settings | Build, Execution, Deployment | Build Tools | Maven | Ignored Files找到忽略的pom.xml，将勾选取消即可。</description>
+    </item>
+    
+    <item>
+      <title>修改 IDEA Maven WebApp web.xml 的版本</title>
+      <link>https://walker911.github.io/2018/07/25/%E4%BF%AE%E6%94%B9-idea-maven-webapp-web.xml-%E7%9A%84%E7%89%88%E6%9C%AC/</link>
+      <pubDate>Wed, 25 Jul 2018 08:55:36 +0000</pubDate>
+      
+      <guid>https://walker911.github.io/2018/07/25/%E4%BF%AE%E6%94%B9-idea-maven-webapp-web.xml-%E7%9A%84%E7%89%88%E6%9C%AC/</guid>
+      <description>&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;
+
+&lt;p&gt;记录修改 IDEA Maven WebApp &lt;code&gt;web.xml&lt;/code&gt; 的过程。&lt;/p&gt;
+
+&lt;p&gt;目前，使用IDEA创建Maven webapp项目默认生成的web.xml文件的版本是2.3，文件内容如下：&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

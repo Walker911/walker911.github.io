@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hexo on Walker</title>
+    <link>https://walker911.github.io/tags/hexo/</link>
+    <description>Recent content in Hexo on Walker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 10 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://walker911.github.io/tags/hexo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>阿里云ECS搭建Hexo</title>
+      <link>https://walker911.github.io/2018/09/10/%E9%98%BF%E9%87%8C%E4%BA%91ecs%E6%90%AD%E5%BB%BAhexo/</link>
+      <pubDate>Mon, 10 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://walker911.github.io/2018/09/10/%E9%98%BF%E9%87%8C%E4%BA%91ecs%E6%90%AD%E5%BB%BAhexo/</guid>
+      <description>&lt;p&gt;使用阿里云 ECS 部署博客 Hexo，主要记录 Hexo 如何 push 到阿里云服务器，实现本地环境 Hexo 生成静态文件，将文件 push 到服务器后，通过 git-hooks 自动将文件 checkout 到部署目录。&lt;/p&gt;
+
+&lt;h2 id=&#34;环境&#34;&gt;环境&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;服务器：阿里云2核4G&lt;/li&gt;
+&lt;li&gt;系统：CentOS7&lt;/li&gt;
+&lt;li&gt;nginx：借助 LNMP 所安装的 nginx&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

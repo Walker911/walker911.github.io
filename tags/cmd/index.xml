@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cmd on Walker</title>
+    <link>https://walker911.github.io/tags/cmd/</link>
+    <description>Recent content in Cmd on Walker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 16 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://walker911.github.io/tags/cmd/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>cmd 命令使用清单</title>
+      <link>https://walker911.github.io/2018/11/16/cmd-%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%B8%85%E5%8D%95/</link>
+      <pubDate>Fri, 16 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://walker911.github.io/2018/11/16/cmd-%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%B8%85%E5%8D%95/</guid>
+      <description> 记录一些使用的 cmd 命令清单。
+命令  终止进程：taskkill /f /im chrome.exe tasklist：任务列表  遇到的问题 遇到 windows 端口被占用，又不想去任务管理器中逐个查找，可以使用下述过程进行处理，这种情况是 hexo 和 福昕阅读器端口出现冲突的情况。
+ 查看端口占用的进程ID(PID)  netstat -ano 各个端口占用和进程PID // 查看4000端口情况 netstat -ano | findstr &amp;quot;4000&amp;quot;   查看端口号所对应的应用程序  tasklist | findstr &amp;quot;4632&amp;quot;   终止进程  taskkill /pid 4632 /F or taskkill /f /t /im 进程  </description>
+    </item>
+    
+  </channel>
+</rss>

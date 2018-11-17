@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Maven on Walker</title>
+    <link>https://walker911.github.io/categories/maven/</link>
+    <description>Recent content in Maven on Walker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 06 Jun 2018 23:21:35 +0000</lastBuildDate>
+    
+	<atom:link href="https://walker911.github.io/categories/maven/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Maven安装和配置</title>
+      <link>https://walker911.github.io/2018/06/06/maven%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Wed, 06 Jun 2018 23:21:35 +0000</pubDate>
+      
+      <guid>https://walker911.github.io/2018/06/06/maven%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;h2 id=&#34;环境&#34;&gt;环境&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Windows 10 专业版&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;安装和配置&#34;&gt;安装和配置&lt;/h2&gt;
+
+&lt;h3 id=&#34;下载&#34;&gt;下载&lt;/h3&gt;
+
+&lt;p&gt;在maven&lt;a href=&#34;https://maven.apache.org/&#34;&gt;官网&lt;/a&gt;下载maven的免安装&lt;code&gt;zip&lt;/code&gt;包，下载完成后解压到指定目录，例如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;D:\build-tools\maven\apache-maven-3.5.3
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
